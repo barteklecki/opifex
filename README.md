@@ -1,7 +1,17 @@
 # Opifex
 *lat. craftsman, maker*
 
-parametric cut shapes generating wizard
+Features:
+- generate parametric cut parts shapes
+- import cut files
+- autonest shapes
+- download file with nested shapes
+
+Used libs / credits:
+- React
+- Material-UI
+- MakerJS
+- SVGNest
 
 Autor.
 Bartosz Łęcki
