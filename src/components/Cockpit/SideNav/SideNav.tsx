@@ -27,7 +27,7 @@ const sideNav = ({selected}: sizeNavProps) => {
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
                 <ListItemText primary='Parts list' />
             </ListItem>
-            <ListItem button key='add-parametric' selected={ selected === 1 }>
+            <ListItem button key='add-parametric' selected={ selected === 1 } alignItems="center">
                 <ListItemIcon><CasinoIcon /></ListItemIcon>
                 <ListItemText primary='Add parametric' />
             </ListItem>

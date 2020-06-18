@@ -19,7 +19,7 @@ const useStyles = makeStyles({
         borderColor: 'Gray',
         opacity: '20%',
     },
-  });
+});
 
 const Part = (props: PartProps) => {
 
