@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SideNav from './SideNav/SideNav';
 import Workspace from './Workspace/Workspace';
-import Account from './Workspace/Account/Account';
 
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -46,8 +45,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
         width: drawerWidth,
+        minWidth: '72px',
         flexShrink: 0,
         whiteSpace: 'nowrap',
+        paddingLeft: '10px',
     },
     drawerOpen: {
         width: drawerWidth,
@@ -76,10 +77,10 @@ const useStyles = makeStyles((theme: Theme) =>
         ...theme.mixins.toolbar,
     },
     toolbarPrimary: {
-        minHeight: '30px',
+        minHeight: '36px',
     },
     toolbarSecondary: {
-        minHeight: '38px',
+        minHeight: '40px',
         background: '#333333',
     },
     toolbarBump: {
@@ -107,7 +108,6 @@ const Cockpit = ( ) => {
 
     const [open, setOpen] = useState(true);
     const classes = useStyles();
-    console.log(classes);
     const theme = useTheme();
 
     const handleDrawerOpen = () => {
@@ -171,9 +171,9 @@ const Cockpit = ( ) => {
               >
               <div className={classes.toolbar}>
               <IconButton onClick={handleDrawerClose}>
-                  <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}>
+                  {/* <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}> */}
                     <img src={require('../../assets/logo192.png')} alt="logo" className={classes.logoBig} />
-                  </Zoom>
+                  {/* </Zoom> */}
                   &#160;&#160;&#160;
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>
@@ -183,7 +183,6 @@ const Cockpit = ( ) => {
           <div className={classes.content}>
               <div className={classes.toolbar} />
               <Workspace />
-              <Account />
           </div>
         </div>
     );

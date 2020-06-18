@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 
 type PartProps = {
+    action: (id?: number) => void
 }
 
 const useStyles = makeStyles({
@@ -21,12 +22,15 @@ const useStyles = makeStyles({
     },
 });
 
-const Part = (props: PartProps) => {
+const AddPart = (props: PartProps) => {
 
     const classes = useStyles();
 
     return (
-        <Card className={classes.root}>
+        <Card 
+            className={classes.root}
+            onClick={() => props.action(1)}
+        >
             <CardActionArea style={ {height: '100%'} }>
                 <CardContent>
                         <AddCircleIcon fontSize="large" />
@@ -36,4 +40,4 @@ const Part = (props: PartProps) => {
     );
 }
 
-export default Part;
+export default AddPart;

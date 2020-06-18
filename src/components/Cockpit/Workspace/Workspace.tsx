@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Part from './PartList/Part';
-import AddPart from './PartList/AddPart';
 
-import Grid from '@material-ui/core/Grid';
+import PartsList from './PartsList/PartsList';
+import Account from './Account/Account';
+import AddParametric from './AddParametric/AddParametric';
 
 type workspaceProps = {
 }
@@ -20,18 +20,9 @@ class Workspace extends Component<workspaceProps> {
     render() {
         return (
             <main>
-                <Grid container spacing={3} style={{padding: 3}}>
-                    {   this.state.partsList.map( part => 
-                        (
-                            <Grid item key={part.id}>
-                                <Part info={part}/>
-                            </Grid>
-                        ))
-                    }
-                    <Grid item>
-                        <AddPart />
-                    </Grid>
-                </Grid>
+                <PartsList list={this.state.partsList}/>
+                <AddParametric />
+                <Account />
             </main>
         );
     }

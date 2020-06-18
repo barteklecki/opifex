@@ -18,7 +18,6 @@ type sizeNavProps = {
     selected: number
 }
 
-
 const sideNav = ({selected}: sizeNavProps) => {
     return(
         <>
@@ -27,7 +26,7 @@ const sideNav = ({selected}: sizeNavProps) => {
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
                 <ListItemText primary='Parts list' />
             </ListItem>
-            <ListItem button key='add-parametric' selected={ selected === 1 } alignItems="center">
+            <ListItem button key='add-parametric' selected={ selected === 1 }>
                 <ListItemIcon><CasinoIcon /></ListItemIcon>
                 <ListItemText primary='Add parametric' />
             </ListItem>
