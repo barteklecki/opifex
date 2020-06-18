@@ -1,5 +1,7 @@
 import React from 'react';
 
+import CloudBackup from './CloudBackup/CloudBackup';
+
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 
@@ -10,7 +12,7 @@ import PermDataSettingIcon from '@material-ui/icons/PermDataSetting';
 import PictureInPictureIcon from '@material-ui/icons/PictureInPicture';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import SettingsIcon from '@material-ui/icons/Settings';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 type sizeNavProps = {
     selected: number
@@ -25,9 +27,9 @@ const sideNav = ({selected}: sizeNavProps) => {
                 <ListItemIcon><CategoryIcon /></ListItemIcon>
                 <ListItemText primary='Parts list' />
             </ListItem>
-            <ListItem button key='parametric-part' selected={ selected === 1 }>
+            <ListItem button key='add-parametric' selected={ selected === 1 }>
                 <ListItemIcon><CasinoIcon /></ListItemIcon>
-                <ListItemText primary='Parametric shape' />
+                <ListItemText primary='Add parametric' />
             </ListItem>
             <ListItem button key='file-import' selected={ selected === 2 }>
                 <ListItemIcon><QueueIcon /></ListItemIcon>
@@ -55,9 +57,19 @@ const sideNav = ({selected}: sizeNavProps) => {
         </List>
         <Divider />
         <List>
-            <ListItem button key='settings' selected={ selected === 7 }>
-                <ListItemIcon><SettingsIcon /></ListItemIcon>
-                <ListItemText primary='Settings' />
+            <ListItem button key='login' selected={ selected === 7 }>
+                <ListItemIcon><AccountCircleIcon /></ListItemIcon>
+                <ListItemText primary='Login' />
+            </ListItem>
+        </List>
+        <List>
+            <ListItem button key='cloud-backup' selected={ selected === 7 }>
+                <ListItemIcon>
+                    <CloudBackup
+                        online={false}
+                        done={false} />
+                </ListItemIcon>
+                <ListItemText primary='Cloud backup' />
             </ListItem>
         </List>
         </>

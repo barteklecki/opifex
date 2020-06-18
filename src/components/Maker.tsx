@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-import { AppBar } from '@material-ui/core';
-
-
 class Maker extends Component {
     render() {
         return(

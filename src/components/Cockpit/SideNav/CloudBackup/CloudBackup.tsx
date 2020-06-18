@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { IconButton } from '@material-ui/core';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CloudOffIcon from '@material-ui/icons/CloudOff';
 import CloudDoneIcon from '@material-ui/icons/CloudDone';
-
 
 type cloudBackupProps = {
     online: boolean,
@@ -17,9 +15,9 @@ const cloudBackup = ({ online, done, badge }: cloudBackupProps) => {
     if (online) { cloudStatusIcon = <CloudUploadIcon fontSize="small"  /> }
     if (done) { cloudStatusIcon = <CloudDoneIcon fontSize="small"  /> }
     return(
-        <IconButton edge="start" color="inherit" aria-label="cloud backup">
+        <>
             {cloudStatusIcon}
-        </IconButton>
+        </>
     );
 }
 

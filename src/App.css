@@ -2,3 +2,14 @@
   text-align: center;
 }
 
+.content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}

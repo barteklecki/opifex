@@ -1,13 +1,12 @@
 import React from 'react';
-import './App.css';
+
+import Cockpit from './components/Cockpit/Cockpit';
+import Footer from './components/Footer/Footer';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
-import Cockpit from './components/Cockpit/Cockpit';
-
-import AppBar from '@material-ui/core/AppBar';
+import './App.css';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -20,12 +19,8 @@ function App() {
     <div className="App">
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <div>
-          <AppBar position="fixed">
-            Opifex
-          </AppBar>
-        </div>
         <Cockpit />
+        <Footer />
       </ThemeProvider>
     </div>
   );
