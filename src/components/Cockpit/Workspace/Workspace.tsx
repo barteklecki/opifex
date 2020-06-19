@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import PartsList from './PartsList/PartsList';
 import Account from './Account/Account';
@@ -19,7 +20,10 @@ class Workspace extends Component<workspaceProps> {
 
     addPartHandler = () => {
         // find max objact id in array
-        const newId = 1 + Math.max.apply(Math, this.state.partsList.map(function(obj) { return obj.id; })); 
+        let newId = 1 + Math.max.apply(Math, this.state.partsList.map(function(obj) { return obj.id; }));
+        if (!this.state.partsList.length) {
+            newId = 0;
+        }
         this.setState({
             partsList: [
                 ...this.state.partsList,
@@ -48,14 +52,19 @@ class Workspace extends Component<workspaceProps> {
     render() {
         return (
             <main>
-                <PartsList 
-                    list={this.state.partsList}
-                    add={this.addPartHandler}
-                    info={this.infoPartHandler}
-                    edit={this.editPartHandler}
-                    delete={this.deletePartHandler} />
-                <AddParametric />
-                <Account />
+                <Switch>
+                    <Route path="/list" exact render={ () => (
+                        <PartsList 
+                            list={this.state.partsList}
+                            add={this.addPartHandler}
+                            info={this.infoPartHandler}
+                            edit={this.editPartHandler}
+                            delete={this.deletePartHandler} />
+                    )} />
+                    <Route path="/parametric" component={AddParametric} />
+                    <Route path="/login" component={Account} />
+                    <Redirect from="/" to="/list" />
+                </Switch>
             </main>
         );
     }

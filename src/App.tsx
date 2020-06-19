@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import Cockpit from './components/Cockpit/Cockpit';
 import Footer from './components/Footer/Footer';
@@ -17,11 +18,13 @@ const darkTheme = createMuiTheme({
 function App() {
   return (
     <div className="App">
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <Cockpit />
-        <Footer />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <Cockpit />
+          <Footer />
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }

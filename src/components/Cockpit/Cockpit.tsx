@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SideNav from './SideNav/SideNav';
 import Workspace from './Workspace/Workspace';
 
@@ -103,7 +103,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Cockpit = ( ) => {
-    const [menuSelected, setMenuSelected] = useState(0);
 
     const classes = useStyles();
     const theme = useTheme();
@@ -177,7 +176,7 @@ const Cockpit = ( ) => {
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>
               </div>
-              <SideNav selected={menuSelected} />
+              <SideNav/>
           </Drawer>
           <div className={classes.content}>
               <div className={classes.toolbar} />

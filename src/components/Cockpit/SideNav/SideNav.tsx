@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link, LinkProps, useLocation } from 'react-router-dom';
+import { Route } from 'react-router';
 
 import CloudBackup from './CloudBackup/CloudBackup';
 
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Omit } from '@material-ui/types';
 import Divider from '@material-ui/core/Divider';
 
 import CategoryIcon from '@material-ui/icons/Category';
@@ -14,64 +17,58 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
-type sizeNavProps = {
-    selected: number
+interface ListItemLinkProps {
+    primary: string;
+    to: string;
+    icon?: React.ReactElement;
+    secondary?: string;
+    selected?: boolean;
 }
 
-const sideNav = ({selected}: sizeNavProps) => {
+function ListItemLink(props: ListItemLinkProps) {
+    const { primary, to, icon, secondary, selected } = props;
+    const location = useLocation();
+
+    const renderLink = React.useMemo(
+      () =>
+        React.forwardRef<any, Omit<LinkProps, 'to'>>((itemProps, ref) => (
+          <Link to={to} ref={ref} {...itemProps} />
+        )),
+      [to],
+    );
+
+    let isSelected = to.includes(location.pathname);
+
+    return (
+        <ListItem button component={renderLink} selected={isSelected} variant="dense">
+          {icon ? <ListItemIcon >{icon}</ListItemIcon> : null}
+          <ListItemText primary={primary} secondary={secondary} />
+        </ListItem>
+    );
+}
+
+
+const sideNav = () => {
     return(
-        <>
-        <List>
-            <ListItem button key='parts-list' selected={ selected === 0 }>
-                <ListItemIcon><CategoryIcon /></ListItemIcon>
-                <ListItemText primary='Parts list' />
-            </ListItem>
-            <ListItem button key='add-parametric' selected={ selected === 1 }>
-                <ListItemIcon><CasinoIcon /></ListItemIcon>
-                <ListItemText primary='Add parametric' />
-            </ListItem>
-            <ListItem button key='file-import' selected={ selected === 2 }>
-                <ListItemIcon><QueueIcon /></ListItemIcon>
-                <ListItemText primary='File import' />
-            </ListItem>
-            <ListItem button key='part-edit' selected={ selected === 3 }>
-                <ListItemIcon><PermDataSettingIcon /></ListItemIcon>
-                <ListItemText primary='Part edit' />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button key='plate-settings' selected={ selected === 4 }>
-                <ListItemIcon><PictureInPictureIcon /></ListItemIcon>
-                <ListItemText primary='Plate settings' />
-            </ListItem>
-            <ListItem button key='nesting' selected={ selected === 5 }>
-                <ListItemIcon><DashboardIcon /></ListItemIcon>
-                <ListItemText primary='Nesting' />
-            </ListItem>
-            <ListItem button key='export' selected={ selected === 6 }>
-                <ListItemIcon><SaveAltIcon /></ListItemIcon>
-                <ListItemText primary='Export' />
-            </ListItem>
-        </List>
-        <Divider />
-        <List>
-            <ListItem button key='login' selected={ selected === 7 }>
-                <ListItemIcon><AccountCircleIcon /></ListItemIcon>
-                <ListItemText primary='Login' />
-            </ListItem>
-        </List>
-        <List>
-            <ListItem button key='cloud-backup' selected={ selected === 7 }>
-                <ListItemIcon>
-                    <CloudBackup
-                        online={false}
-                        done={false} />
-                </ListItemIcon>
-                <ListItemText primary='Cloud backup' />
-            </ListItem>
-        </List>
-        </>
+        <nav>
+            <List aria-label="Parts section">
+                <ListItemLink to="/list" primary="Parts list" icon={<CategoryIcon />} />
+                <ListItemLink selected to="/parametric" primary="Add parametric" icon={<CasinoIcon />} />
+                <ListItemLink to="/" primary="File import" icon={<QueueIcon />} />
+                <ListItemLink to="/" primary="Part edit" icon={<PermDataSettingIcon />} />
+            </List>
+            <Divider />
+            <List aria-label="Nesting section">
+                <ListItemLink to="/" primary="Plate settings" icon={<PictureInPictureIcon />} />
+                <ListItemLink to="/" primary="Nesting" icon={<DashboardIcon />} />
+                <ListItemLink to="/" primary="Export" icon={<SaveAltIcon />} />
+            </List>
+            <Divider />
+            <List aria-label="Account section">
+                <ListItemLink to="/login" primary="Login" secondary="Logout, login to sync" icon={<AccountCircleIcon />} />
+                <ListItemLink to="/" primary="Cloud backup" icon={<CloudBackup online={false} done={false} />} />
+            </List>
+        </nav>
     );
 
 }
