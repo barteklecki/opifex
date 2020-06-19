@@ -23,11 +23,14 @@ const useStyles = makeStyles({
   });
 
 type PartProps = {
-    info: { 
+    part: { 
         id: number, 
         name: string, 
         qty: number,
-    },
+    }
+    info: (id: number) => void
+    edit: (id: number) => void
+    delete: (id: number) => void
 }
 
 const Part = (props: PartProps) => {
@@ -37,9 +40,9 @@ const Part = (props: PartProps) => {
     return (
         <Card className={classes.root}>
             <div>
-                <strong> id: </strong>{props.info.id},
-                <strong> name: </strong>{props.info.name},
-                <strong> qty: </strong>{props.info.qty}
+                <strong> id: </strong>{props.part.id},
+                <strong> name: </strong>{props.part.name},
+                <strong> qty: </strong>{props.part.qty}
             </div>
             <CardActionArea>
                 <img
@@ -48,15 +51,15 @@ const Part = (props: PartProps) => {
                 alt="Example shape"
                 />
             </CardActionArea>
-            <Button size="small">
-                    <InfoIcon />
-                </Button>
-                <Button size="small">
-                    <PermDataSettingIcon />
-                </Button>
-                <Button size="small">
-                    <DeleteForeverIcon />
-                </Button>
+            <Button size="small" onClick={() => props.info(props.part.id)}>
+                <InfoIcon />
+            </Button>
+            <Button size="small" onClick={() => props.edit(props.part.id)}>
+                <PermDataSettingIcon />
+            </Button>
+            <Button size="small" onClick={() => props.delete(props.part.id)}>
+                <DeleteForeverIcon />
+            </Button>
         </Card>
     );
 }

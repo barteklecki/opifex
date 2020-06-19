@@ -15,66 +15,64 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Zoom from '@material-ui/core/Zoom';
 
-const drawerWidth = 200;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-        display: 'flex',
+      display: 'flex',
     },
     appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
     },
     appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
+      marginLeft: drawerWidth,
+      width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     menuButton: {
-        marginRight: 40,
+      marginRight: 36,
     },
     hide: {
-        display: 'none',
+      display: 'none',
     },
     drawer: {
-        width: drawerWidth,
-        minWidth: '72px',
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        paddingLeft: '10px',
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
     },
     drawerOpen: {
-        width: drawerWidth,
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     drawerClose: {
-        transition: theme.transitions.create('width', {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.leavingScreen,
-        }),
-        overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
-        [theme.breakpoints.up('sm')]: {
-          width: theme.spacing(9) + 1,
-        },
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+      },
     },
     toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
-        // necessary for content to be below app bar
-        ...theme.mixins.toolbar,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
     },
     toolbarPrimary: {
         minHeight: '36px',
@@ -87,8 +85,8 @@ const useStyles = makeStyles((theme: Theme) =>
         paddingLeft: '10px',
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+      flexGrow: 1,
+      padding: theme.spacing(3),
     },
     logoMini: {
         height: '30px',
@@ -105,10 +103,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const Cockpit = ( ) => {
+    const [menuSelected, setMenuSelected] = useState(0);
 
-    const [open, setOpen] = useState(true);
     const classes = useStyles();
     const theme = useTheme();
+    const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -129,7 +128,7 @@ const Cockpit = ( ) => {
               <Toolbar variant="dense" className={classes.toolbarPrimary}>
                   <IconButton
                       aria-label="logo"
-                      onClick={handleDrawerOpen}
+                      onClick={handleDrawerOpen} 
                       size="small"
                       edge="start"
                       className={clsx(classes.menuButton, {
@@ -167,18 +166,18 @@ const Cockpit = ( ) => {
                   [classes.drawerOpen]: open,
                   [classes.drawerClose]: !open,
               }),
-              }} 
+              }}
               >
               <div className={classes.toolbar}>
               <IconButton onClick={handleDrawerClose}>
-                  {/* <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}> */}
+                  <Zoom in={open} style={{ transitionDelay: open ? '500ms' : '0ms' }}>
                     <img src={require('../../assets/logo192.png')} alt="logo" className={classes.logoBig} />
-                  {/* </Zoom> */}
+                  </Zoom>
                   &#160;&#160;&#160;
                   {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
               </IconButton>
               </div>
-              <SideNav selected={0} />
+              <SideNav selected={menuSelected} />
           </Drawer>
           <div className={classes.content}>
               <div className={classes.toolbar} />
