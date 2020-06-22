@@ -21,11 +21,11 @@ const PartsList = (props: ListProps) => {
 
 
     return (
-        <Grid container spacing={3} style={{padding: 3}}>
+        <Grid container spacing={3} style={{padding: 5}}>
             {   props.list.map( part =>
                 (
                     <Grid item key={part.id}>
-                        <Part 
+                        <Part
                             part={part}
                             info={props.info}
                             edit={props.edit}
