@@ -1,4 +1,6 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import SideNav from './SideNav/SideNav';
 import Workspace from './Workspace/Workspace';
 
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+      backgroundColor: theme.palette.grey[800],
     },
     appBarShift: {
       marginLeft: drawerWidth,
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
     },
     menuButton: {
-      marginRight: 36,
+      marginRight: theme.spacing(2),
     },
     hide: {
       display: 'none',
@@ -62,9 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
       overflowX: 'hidden',
       width: theme.spacing(7) + 1,
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9) + 1,
-      },
+
     },
     toolbar: {
       display: 'flex',
@@ -76,17 +77,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     toolbarPrimary: {
         minHeight: '36px',
+        paddingLeft: theme.spacing(2),
     },
     toolbarSecondary: {
         minHeight: '40px',
-        background: '#333333',
-    },
-    toolbarBump: {
-        paddingLeft: '10px',
+        background: theme.palette.background.default,
+        paddingLeft: theme.spacing(2),
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(3, 2),
     },
     logoMini: {
         height: '30px',
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme: Theme) =>
         width: '60px',
     },
     strong: {
-        color: '#6AD6FF',
+        color: theme.palette.primary.main,
     }
   }),
 );
@@ -119,7 +119,6 @@ const Cockpit = ( ) => {
     return (
         <div className={classes.root}>
           <AppBar
-              style={{ background: '#3C3C3C' }}
               position="fixed"
               className={clsx(classes.appBar, {
               [classes.appBarShift]: open,
@@ -127,7 +126,7 @@ const Cockpit = ( ) => {
               <Toolbar variant="dense" className={classes.toolbarPrimary}>
                   <IconButton
                       aria-label="logo"
-                      onClick={handleDrawerOpen} 
+                      onClick={handleDrawerOpen}
                       size="small"
                       edge="start"
                       className={clsx(classes.menuButton, {
@@ -141,7 +140,7 @@ const Cockpit = ( ) => {
                   </Typography>
               </Toolbar>
               <Toolbar variant="dense" className={classes.toolbarSecondary}>
-                  <IconButton
+                  <IconButton 
                           color="inherit"
                           aria-label="open drawer"
                           onClick={handleDrawerOpen}
@@ -152,6 +151,11 @@ const Cockpit = ( ) => {
                       >
                           <MenuIcon />
                       </IconButton>
+                      <Switch>
+                            <Route path="/list" render={ () => <strong>[Parts list toolbar]</strong> } />
+                            <Route path="/parametric" render={ () => <strong>[Add paramiter toolbar]</strong> } />
+                            <Route path="/login" render={ () => <strong>[Login toolbar]</strong> } />
+                      </Switch>
               </Toolbar>
           </AppBar>
           <Drawer

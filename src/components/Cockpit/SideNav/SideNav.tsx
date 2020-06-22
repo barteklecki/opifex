@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, LinkProps, useLocation } from 'react-router-dom';
-import { Route } from 'react-router';
 
 import CloudBackup from './CloudBackup/CloudBackup';
 
@@ -22,11 +21,11 @@ interface ListItemLinkProps {
     to: string;
     icon?: React.ReactElement;
     secondary?: string;
-    selected?: boolean;
+    dense?: boolean;
 }
 
 function ListItemLink(props: ListItemLinkProps) {
-    const { primary, to, icon, secondary, selected } = props;
+    const { primary, to, icon, secondary, dense } = props;
     const location = useLocation();
 
     const renderLink = React.useMemo(
@@ -40,20 +39,19 @@ function ListItemLink(props: ListItemLinkProps) {
     let isSelected = to.includes(location.pathname);
 
     return (
-        <ListItem button component={renderLink} selected={isSelected} variant="dense">
+        <ListItem button component={renderLink} selected={isSelected} dense={dense}>
           {icon ? <ListItemIcon >{icon}</ListItemIcon> : null}
           <ListItemText primary={primary} secondary={secondary} />
         </ListItem>
     );
 }
 
-
 const sideNav = () => {
     return(
         <nav>
             <List aria-label="Parts section">
                 <ListItemLink to="/list" primary="Parts list" icon={<CategoryIcon />} />
-                <ListItemLink selected to="/parametric" primary="Add parametric" icon={<CasinoIcon />} />
+                <ListItemLink to="/parametric" primary="Add parametric" icon={<CasinoIcon />} />
                 <ListItemLink to="/" primary="File import" icon={<QueueIcon />} />
                 <ListItemLink to="/" primary="Part edit" icon={<PermDataSettingIcon />} />
             </List>
@@ -65,8 +63,9 @@ const sideNav = () => {
             </List>
             <Divider />
             <List aria-label="Account section">
-                <ListItemLink to="/login" primary="Login" secondary="Logout, login to sync" icon={<AccountCircleIcon />} />
-                <ListItemLink to="/" primary="Cloud backup" icon={<CloudBackup online={false} done={false} />} />
+                <ListItemLink dense to="/login" primary="Login" icon={<AccountCircleIcon />} />
+                <ListItemLink dense  to="/" primary="Cloud backup" secondary="Login to backup" 
+                    icon={<CloudBackup online={false} done={false} />} />
             </List>
         </nav>
     );

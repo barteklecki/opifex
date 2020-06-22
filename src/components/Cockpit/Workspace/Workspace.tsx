@@ -54,7 +54,7 @@ class Workspace extends Component<workspaceProps> {
             <main>
                 <Switch>
                     <Route path="/list" exact render={ () => (
-                        <PartsList 
+                        <PartsList
                             list={this.state.partsList}
                             add={this.addPartHandler}
                             info={this.infoPartHandler}

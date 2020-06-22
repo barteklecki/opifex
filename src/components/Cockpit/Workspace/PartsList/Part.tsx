@@ -23,9 +23,9 @@ const useStyles = makeStyles({
   });
 
 type PartProps = {
-    part: { 
-        id: number, 
-        name: string, 
+    part: {
+        id: number,
+        name: string,
         qty: number,
     }
     info: (id: number) => void
