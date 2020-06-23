@@ -1,73 +1,61 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { connect, ConnectedProps } from 'react-redux';
+
+import {
+    AppState,
+    ADD_PART_TO_LIST,
+    DELETE_PART_FROM_LIST,
+    EDIT_PART_FROM_LIST,
+    INFO_PART_FROM_LIST,
+} from '../../../store/types';
 
 import PartsList from './PartsList/PartsList';
 import Account from './Account/Account';
 import AddParametric from './AddParametric/AddParametric';
 
-type workspaceProps = {
-}
-
-class Workspace extends Component<workspaceProps> {
-
-    state = {
-        partsList: [
-            {id: 0, name: 'Part1', qty: 1},
-            {id: 1, name: 'Part2', qty: 1},
-            {id: 2, name: 'Part3', qty: 1},
-        ],
-    }
-
-    addPartHandler = () => {
-        // find max objact id in array
-        let newId = 1 + Math.max.apply(Math, this.state.partsList.map(function(obj) { return obj.id; }));
-        if (!this.state.partsList.length) {
-            newId = 0;
-        }
-        this.setState({
-            partsList: [
-                ...this.state.partsList,
-                {id: newId, name: `Part${newId+1}`, qty: 1}
-            ]
-        })
-    }
-
-    deletePartHandler = (id: number) => {
-        const newList = [...this.state.partsList];
-        const index = newList.findIndex( element => element.id === id );
-        newList.splice(index, 1);
-        this.setState({
-            partsList: [...newList]
-        })
-    }
-
-    editPartHandler = (id: number) => {
-        console.log(`[ Edit part id=${id} ]`);
-    }
-
-    infoPartHandler = (id: number) => {
-        console.log(`[ Info about part id=${id} ]`);
-    }
-
-    render() {
-        return (
-            <main>
-                <Switch>
-                    <Route path="/list" exact render={ () => (
-                        <PartsList
-                            list={this.state.partsList}
-                            add={this.addPartHandler}
-                            info={this.infoPartHandler}
-                            edit={this.editPartHandler}
-                            delete={this.deletePartHandler} />
-                    )} />
-                    <Route path="/parametric" component={AddParametric} />
-                    <Route path="/login" component={Account} />
-                    <Redirect from="/" to="/list" />
-                </Switch>
-            </main>
-        );
+const mapStateToProps = (state: AppState) => {
+    return {
+        partsList: state.partsList,
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddPart: () => dispatch({ 
+            type: ADD_PART_TO_LIST }),
+        onDeletePart: (id: number) => dispatch({
+            type: DELETE_PART_FROM_LIST,
+            payload: { id: id } }),
+        onInfoPart: (id: number) => dispatch({
+            type: INFO_PART_FROM_LIST,
+            payload: { id: id } }),
+        onEditPart: (id: number) => dispatch({
+            type: EDIT_PART_FROM_LIST,
+            payload: { id: id } }),
+    }
+}
+const connector = connect(mapStateToProps, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default Workspace;
+const Workspace = (props) => {
+
+    return (
+        <main>
+            <Switch>
+                <Route path="/list" exact render={ () => (
+                    <PartsList
+                        list={props.partsList}
+                        add={props.onAddPart}
+                        info={props.onInfoPart}
+                        edit={props.onEditPart}
+                        delete={props.onDeletePart} />
+                )} />
+                <Route path="/parametric" component={AddParametric} />
+                <Route path="/login" component={Account} />
+                <Redirect from="/" to="/list" />
+            </Switch>
+        </main>
+    );
+};
+
+export default connector( Workspace );
