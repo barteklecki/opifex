@@ -15,7 +15,6 @@ export const INFO_PART_FROM_LIST = 'INFO_PART_FROM_LIST';
 
 interface AddPartAction {
   type: typeof ADD_PART_TO_LIST
-  payload: null
 }
 interface DeletePartAction {
   type: typeof DELETE_PART_FROM_LIST
