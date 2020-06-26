@@ -2,10 +2,11 @@
 *lat. craftsman, maker*
 
 Features:
-- generate parametric cut parts shapes
-- import cut files
-- autonest shapes
-- download file with nested shapes
+- [x] user friendly ui native app appearance
+- [ ] generate parametric cut parts shapes
+- [ ] import cut files
+- [ ] autonest shapes
+- [ ] download file with nested shapes
 
 Used libs / credits:
 - React
