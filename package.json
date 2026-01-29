@@ -17,7 +17,7 @@
     "@types/react-router-dom": "^5.1.5",
     "csstype": "^2.6.10",
     "fontsource-roboto": "^2.1.4",
-    "makerjs": "^0.17.0",
+    "makerjs": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
